@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silicon Buffett · Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .demo-container {
+    max-width: 800px; width: 100%;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .chat-card {
+    background: #16213e; border-radius: 16px;
+    overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .chat-header {
+    background: #0f3460; padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .chat-header .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .chat-header .dot.r { background: #ff5f57; }
+  .chat-header .dot.y { background: #ffbd2e; }
+  .chat-header .dot.g { background: #27ca40; }
+  .chat-header .title {
+    color: #8892b0; font-size: 13px;
+    margin-left: 8px; font-weight: 500;
+  }
+  .chat-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .msg {
+    display: flex; flex-direction: column; gap: 4px;
+    max-width: 90%;
+  }
+  .msg.user { align-self: flex-end; }
+  .msg.ai { align-self: flex-start; }
+  .msg .label {
+    font-size: 11px; color: #8892b0; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 2px;
+  }
+  .msg .bubble {
+    padding: 12px 16px; border-radius: 12px;
+    font-size: 14px; line-height: 1.6; color: #eaeaea;
+    white-space: pre-wrap;
+  }
+  .msg.user .bubble { background: #2563eb; }
+  .msg.ai .bubble { background: #1e293b; border: 1px solid #334155; }
+  .msg .bubble .highlight { color: #fbbf24; }
+  .msg .bubble .disclaimer {
+    color: #94a3b8; font-size: 12px; margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid #334155;
+  }
+  .skill-badge {
+    display: inline-block; background: #0f3460;
+    color: #64ffda; font-size: 12px; padding: 4px 10px;
+    border-radius: 8px; margin-bottom: 10px;
+  }
+  @media (max-width: 600px) {
+    .chat-body { padding: 12px; }
+    .msg .bubble { font-size: 13px; }
+  }
+  .section-label {
+    color: #8892b0; font-size: 14px; text-align: center;
+    font-weight: 600; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="demo-container">
+
+<!-- Demo 1: Company Analysis -->
+<div>
+  <div class="section-label">Demo 1 &mdash; Company Analysis · 公司分析</div>
+</div>
+<div class="chat-card">
+  <div class="chat-header">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+  </div>
+  <div class="chat-body">
+    <div class="msg user">
+      <span class="label">You</span>
+      <div class="bubble">Should I invest in Moutai?<br>茅台能投吗？</div>
+    </div>
+    <div class="msg ai">
+      <span class="label">Silicon Buffett · 硅基巴菲特</span>
+      <div class="bubble"><span class="highlight">Let me think about this the way I'd think about any business — by going through the four steps.</span>
+
+<b>Step 1: Circle of Competence</b>
+I've visited China. I've seen the culture around baijiu — it's fascinating. But do I understand the regulatory environment for state-owned liquor companies? <span class="highlight">Not well enough to bet billions on it.</span> That alone would make me cautious.
+
+<b>Step 2: Moat</b>
+A brand so strong people gift it at weddings. Pricing power that makes Coca-Cola look modest. If you put $10 billion on the table tomorrow, you couldn't build another Moutai. <span class="highlight">That's a real moat.</span>
+
+<b>Step 3: Management & Valuation</b>
+This is where I'd need to dig deeper. State-owned enterprises have different incentives than shareholder-owned businesses. The numbers might look great, but <span class="highlight">I need to understand who's steering the ship before I get on board.</span>
+<span class="disclaimer">⚠️ 以上仅为巴菲特投资哲学的推演，不构成任何投资建议。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Demo 2: Holdings Query -->
+<div>
+  <div class="section-label" style="margin-top: 12px;">Demo 2 &mdash; Holdings Query · 持仓查询</div>
+</div>
+<div class="chat-card">
+  <div class="chat-header">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+  </div>
+  <div class="chat-body">
+    <div class="msg user">
+      <span class="label">You</span>
+      <div class="bubble">How much Apple do we still own? When did we start buying?</div>
+    </div>
+    <div class="msg ai">
+      <span class="label">Silicon Buffett · 硅基巴菲特</span>
+      <div class="bubble"><b>Ah, Apple.</b> The best investment we ever made — better than Coca-Cola, better than GEICO. Not bad for a company I avoided for decades because I "didn't understand technology." Turns out I was looking at it wrong — <span class="highlight">it's not a tech company, it's a consumer products company with the strongest ecosystem moat I've ever seen.</span>
+
+We started buying in <b>2016 Q1</b>. At the peak, we held over <b>900 million shares</b>. But as of <b>2025 Q1</b>, we're down to about <b>300 million shares</b>.
+
+Why did we sell? Not because Apple became a bad business — far from it. <span class="highlight">We trimmed because the position simply got too big.</span> When one stock becomes 40%+ of your portfolio, you're no longer diversified.
+
+Tim Cook has done a magnificent job. The ecosystem is the moat. People don't switch phones over a $100 price difference when their whole digital life — photos, messages, apps, payments — lives in one ecosystem. <span class="highlight">That's stickiness you can't buy.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Demo 3: Philosophy -->
+<div>
+  <div class="section-label" style="margin-top: 12px;">Demo 3 &mdash; Philosophy · 投资哲学</div>
+</div>
+<div class="chat-card">
+  <div class="chat-header">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+  </div>
+  <div class="chat-body">
+    <div class="msg user">
+      <span class="label">You</span>
+      <div class="bubble">What is a moat? Explain it simply.</div>
+    </div>
+    <div class="msg ai">
+      <span class="label">Silicon Buffett · 硅基巴菲特</span>
+      <div class="bubble"><b>Imagine a castle surrounded by a moat filled with crocodiles.</b> The castle is your business. The crocodiles are what keep competitors from storming in and taking your profits.
+
+Some moats are obvious — <span class="highlight">Coca-Cola's brand</span>. You could spend $100 billion and you still couldn't make people switch from Coke to "New Cola." Trust me, someone tried.
+
+Some moats are sneakier — <span class="highlight">GEICO's cost advantage</span>. They sell insurance directly, no agents, no commissions. A competitor could copy the website, but they can't copy 50 years of claims data that makes the underwriting better.
+
+The question I ask before every investment is simple: <span class="highlight">"If I had $10 billion and the smartest people in the world, could I build a competitor that takes this company down in 5 years?"</span>
+
+If the answer is "probably yes," I walk away. If the answer is "not a chance" — now we're talking.
+
+<b>The five types of moats I look for:</b>
+1. 🏷️ <b>Brand</b> — Coca-Cola, Moutai
+2. 💰 <b>Cost Advantage</b> — GEICO, Costco
+3. 🔗 <b>Switching Costs</b> — Apple ecosystem, enterprise software
+4. 🌐 <b>Network Effects</b> — American Express (more merchants → more users → more merchants)
+5. 🎫 <b>Toll Bridge</b> — See's Candies (small but irreplaceable in its market)</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
