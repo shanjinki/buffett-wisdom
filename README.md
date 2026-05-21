@@ -210,20 +210,6 @@ This skill is for **educational purposes only**. It simulates Buffett's reasonin
 
 ---
 
-## ⭐ Star History · 星标历史
-
-<p align="center">
-  <a href="https://github.com/shanjinki/buffett-wisdom/stargazers">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=shanjinki/buffett-wisdom&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=shanjinki/buffett-wisdom&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=shanjinki/buffett-wisdom&type=Date" width="600" />
-    </picture>
-  </a>
-</p>
-
----
-
 <p align="center">
   <i>"The most important quality for an investor is temperament, not intellect."</i>
   <br>
