@@ -126,23 +126,21 @@ AI：1964 年合伙公司信里说得很直白——
 
 ## 🚀 Install · 安装
 
-### WorkBuddy
-
 ```bash
-git clone https://github.com/shanjinki/buffett-wisdom.git ~/.workbuddy/skills/buffett-wisdom
+git clone https://github.com/shanjinki/buffett-wisdom.git <你的 skills 目录>/buffett-wisdom
 ```
 
-### Claude Code
+各平台 skills 目录参考：
 
-```bash
-git clone https://github.com/shanjinki/buffett-wisdom.git ~/.claude/skills/buffett-wisdom
-```
+| 平台 | Skills 目录 |
+|------|-------------|
+| WorkBuddy | `~/.workbuddy/skills/` |
+| Claude Code | `~/.claude/skills/` |
+| Codex / OpenAI | `~/.codex/skills/` |
 
-### 其他平台 · Other Platforms
+克隆后重启 Agent 即可生效。所有支持 `SKILL.md` 的 AI Agent 通用——一条命令，路径不同而已。
 
-任何支持 `SKILL.md` 规范的 AI Agent 都可以用——克隆到对应的 skills 目录即可。安装后重启 Agent 或刷新 skill 列表即可生效。
-
-> Works with WorkBuddy, Claude Code, Codex, and any AI agent that supports `SKILL.md`. Clone to your skills directory, restart/reload, done.
+One command, any agent. Clone to your skills directory, restart, done.
 
 ---
 
