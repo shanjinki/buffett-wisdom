@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Buffett Wisdom - 数据校验脚本
+Silicon Buffett - 数据校验脚本
 验证股东信和持仓数据的完整性
 """
 
@@ -89,7 +89,7 @@ def validate_holdings():
 
 def main():
     print("\n" + "🏦" * 25)
-    print("  Buffett Wisdom - 数据完整性校验")
+    print("  Silicon Buffett - 数据完整性校验")
     print("🏦" * 25 + "\n")
 
     validate_letters()

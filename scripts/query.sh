@@ -1,5 +1,5 @@
 #!/bin/bash
-# Buffett Wisdom - 查询脚本
+# Silicon Buffett - 查询脚本
 
 SKILL_DIR="$(dirname "$0")/.."
 DATA_DIR="$SKILL_DIR/data"

@@ -8,10 +8,10 @@
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://github.com/shanjinki/buffett-wisdom/stargazers"><img src="https://img.shields.io/github/stars/shanjinki/buffett-wisdom?style=social" alt="GitHub Stars"></a>
+  <a href="https://github.com/shanjinki/silicon-buffett/stargazers"><img src="https://img.shields.io/github/stars/shanjinki/silicon-buffett?style=social" alt="GitHub Stars"></a>
   <img src="https://img.shields.io/badge/Letters-1957~2025-blue" alt="1957-2025">
   <img src="https://img.shields.io/badge/Holdings-110%20Quarters-green" alt="110 Quarters">
-  <a href="https://github.com/shanjinki/buffett-wisdom/actions/workflows/validate.yml"><img src="https://github.com/shanjinki/buffett-wisdom/actions/workflows/validate.yml/badge.svg" alt="Validation"></a>
+  <a href="https://github.com/shanjinki/silicon-buffett/actions/workflows/validate.yml"><img src="https://github.com/shanjinki/silicon-buffett/actions/workflows/validate.yml/badge.svg" alt="Validation"></a>
 </p>
 
 ---
@@ -128,7 +128,7 @@ AI：1964 年合伙公司信里说得很直白——
 ## 🚀 Install · 安装
 
 ```bash
-git clone https://github.com/shanjinki/buffett-wisdom.git <你的 skills 目录>/buffett-wisdom
+git clone https://github.com/shanjinki/silicon-buffett.git <你的 skills 目录>/silicon-buffett
 ```
 
 各平台 skills 目录参考：
@@ -194,7 +194,7 @@ No manual toggle. Just talk about investing, and the skill kicks in. Works the s
 ## 🗂️ Structure · 项目结构
 
 ```
-buffett-wisdom/
+silicon-buffett/
 ├── SKILL.md                    # 技能定义（入口文件）
 ├── CLAUDE.md                   # Claude Code 专属指令
 ├── AGENTS.md                   # Codex / OpenAI 指令

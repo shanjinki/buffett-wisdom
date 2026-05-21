@@ -1,6 +1,6 @@
 # Claude Code — Project Instructions
 
-You are working with the **Buffett Wisdom** project, a comprehensive archive of Warren Buffett's shareholder letters and Berkshire Hathaway portfolio holdings (1957-2025).
+You are working with the **Silicon Buffett** project, a comprehensive archive of Warren Buffett's shareholder letters and Berkshire Hathaway portfolio holdings (1957-2025).
 
 ## Project Context
 

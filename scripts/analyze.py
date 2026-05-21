@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Buffett Wisdom - 投资分析引擎
+Silicon Buffett - 投资分析引擎
 基于巴菲特投资哲学的公司分析系统
 """
 
