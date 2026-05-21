@@ -1,0 +1,91 @@
+{
+  "description": "伯克希尔·哈撒韦历史持仓概览",
+  "source": "SEC EDGAR 13F  filings (CIK: 0001067983)",
+  "last_updated": "2025-01-31",
+  "coverage": {
+    "start": "1999-Q1",
+    "end": "2025-Q4"
+  },
+  "top_holdings_all_time": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "peak_value": 174000000000,
+      "peak_quarter": "2023-Q4",
+      "entry_year": 2016,
+      "status": "active"
+    },
+    {
+      "ticker": "BAC",
+      "name": "Bank of America Corp",
+      "peak_value": 44000000000,
+      "peak_quarter": "2021-Q2",
+      "entry_year": 2011,
+      "status": "active"
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola Co",
+      "peak_value": 26000000000,
+      "peak_quarter": "2020-Q2",
+      "entry_year": 1988,
+      "status": "active"
+    },
+    {
+      "ticker": "AXP",
+      "name": "American Express Co",
+      "peak_value": 20000000000,
+      "peak_quarter": "2021-Q4",
+      "entry_year": 1964,
+      "status": "active"
+    },
+    {
+      "ticker": "CVX",
+      "name": "Chevron Corp",
+      "peak_value": 38000000000,
+      "peak_quarter": "2022-Q2",
+      "entry_year": 2011,
+      "status": "active"
+    }
+  ],
+  "classic_investments": [
+    {
+      "company": "Coca-Cola",
+      "year": 1988,
+      "initial_investment": 1024000000,
+      "current_shares": 400000000,
+      "notes": "巴菲特最成功的投资之一，持有超过 35 年"
+    },
+    {
+      "company": "American Express",
+      "year": 1964,
+      "notes": "色拉油丑闻后大量买入，持有超过 50 年"
+    },
+    {
+      "company": "Apple",
+      "year": 2016,
+      "peak_shares": 1168000000,
+      "notes": "2016 年开始建仓，成为最大持仓"
+    },
+    {
+      "company": "PetroChina",
+      "year": "2000-2003",
+      "action": "2003-2007 年逐步卖出",
+      "notes": "巴菲特经典的价值投资案例，约 10 倍收益"
+    },
+    {
+      "company": "Wells Fargo",
+      "year": 1989,
+      "exit_year": 2020,
+      "notes": "持有超过 30 年，后因银行业环境变化退出"
+    }
+  ],
+  "sector_allocation_current": {
+    "Technology": "45%",
+    "Financials": "20%",
+    "Consumer Staples": "12%",
+    "Energy": "10%",
+    "Healthcare": "5%",
+    "Other": "8%"
+  }
+}

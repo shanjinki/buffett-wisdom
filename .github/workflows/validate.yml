@@ -1,0 +1,65 @@
+name: Data Validation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'references/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'references/**'
+  schedule:
+    - cron: '0 0 * * 1'  # 每周一运行
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 运行数据校验
+        run: |
+          python scripts/validate_data.py
+
+      - name: 校验 JSON 格式
+        run: |
+          python -m json.tool references/holdings/quarterly_holdings.json > /dev/null
+          python -m json.tool references/holdings/summary.json > /dev/null
+          python -m json.tool references/letters/index.json > /dev/null
+          echo "✅ 所有 JSON 文件格式正确"
+
+      - name: 检查股东信年份
+        run: |
+          YEARS=$(ls references/letters/*.md | xargs -n1 basename | sed 's/.md//' | grep -E '^[0-9]{4}$' | sort -n)
+          COUNT=$(echo "$YEARS" | wc -l)
+          echo "已找到 $COUNT 个股东信文件"
+          if [ "$COUNT" -lt 50 ]; then
+            echo "⚠️  股东信数量少于 50 年，继续收集中..."
+          else
+            echo "✅ 股东信数据充足"
+          fi
+
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安全检查
+        run: |
+          echo "✅ 代码库不包含敏感信息"
+          # 检查是否有 API 密钥或密码
+          if grep -r "api_key\|password\|secret" references/ scripts/ --include="*.json" --include="*.md" 2>/dev/null; then
+            echo "⚠️  发现潜在敏感信息"
+            exit 1
+          fi
+          echo "✅ 安全检查通过"

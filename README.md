@@ -4,8 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/shanjinki/buffett-wisdom?style=social)](https://github.com/shanjinki/buffett-wisdom/stargazers)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025-orange)](https://github.com/shanjinki/buffett-wisdom)
 [![Data Range](https://img.shields.io/badge/Data%20Range-1957~2025-blue)](https://github.com/shanjinki/buffett-wisdom)
+[![Validation](https://github.com/shanjinki/buffett-wisdom/actions/workflows/validate.yml/badge.svg)](https://github.com/shanjinki/buffett-wisdom/actions/workflows/validate.yml)
 
 </p>
 
@@ -17,9 +17,18 @@ English | [中文](#中文)
 
 ## 📖 Project Overview
 
-**Buffett Wisdom** is the most comprehensive open-source collection of Warren Buffett's shareholder letters (1957-2025) and Berkshire Hathaway's historical portfolio data (13F filings from Q1 1999). 
+**Buffett Wisdom** is the most comprehensive open-source collection of Warren Buffett's shareholder letters (1957-2025) and Berkshire Hathaway's historical portfolio data.
 
 This repository serves as a one-stop resource for investors, researchers, and anyone interested in learning from the Oracle of Omaha.
+
+### Data Coverage
+
+| Data Type | Range | Status |
+|-----------|-------|--------|
+| 📖 Shareholder Letters | 1957-2025 (69 years) | ✅ Complete |
+| 📊 Quarterly Holdings | 2010-Q1 to 2025-Q4 | ✅ Complete |
+| 💎 Investment Quotes | 69+ curated quotes | ✅ Complete |
+| 📈 Classic Cases | Coca-Cola, Apple, PetroChina | ✅ Complete |
 
 ---
 
@@ -29,7 +38,7 @@ This repository serves as a one-stop resource for investors, researchers, and an
 |---------|-------------|
 | 📖 **Shareholder Letters** | Full collection from 1957-2025 with summaries and key insights |
 | 📊 **Portfolio Holdings** | Quarterly 13F filings with detailed position changes |
-| 💎 **Investment Quotes** | 50+ curated quotes with bilingual translations |
+| 💎 **Investment Quotes** | 69+ curated quotes with bilingual translations |
 | 🔍 **Searchable** | Easy navigation by year, theme, or keyword |
 | 🤖 **AI-Ready** | Structured JSON data perfect for LLM applications |
 
@@ -41,58 +50,85 @@ This repository serves as a one-stop resource for investors, researchers, and an
 buffett-wisdom/
 ├── SKILL.md                 # OpenClaw skill definition
 ├── README.md                # Bilingual project documentation
-├── data/
+├── CLAUDE.md                # Claude Code instructions
+├── AGENTS.md                # Codex/OpenAI agent instructions
+├── references/            # Reference data
 │   ├── letters/            # Shareholder letter summaries
-│   │   ├── 2024.md         # Each year as a separate file
-│   │   ├── 2023.md
-│   │   └── ...
+│   │   ├── 1957.md ~ 2025.md
+│   │   └── index.json
 │   ├── holdings/           # Portfolio holdings data
-│   │   ├── quarterly/     # 13F filings by quarter
-│   │   └── summary.json   # Aggregated holdings overview
+│   │   ├── 13f_holdings.json    # Full SEC EDGAR 13F data (110 quarters)
+│   │   ├── summary.json    # Aggregated holdings overview
+│   │   └── quarterly_holdings.json
+│   ├── cases/              # Classic investment cases
 │   └── quotes.json         # Curated quotes collection
 ├── scripts/
-│   └── query.sh            # CLI query tools
-└── docs/
-    └── analysis/           # In-depth analysis reports
+│   ├── analyze.py          # Investment analysis engine
+│   ├── query.sh            # CLI query tools
+│   └── validate_data.py    # Data validation script
+├── assets/                 # Output resources
+└── .github/workflows/
+    └── validate.yml        # CI/CD validation
 ```
 
 ---
 
 ## 🚀 Quick Start
 
+### For AI Agents
+
+Install this skill in your AI coding assistant:
+
+```bash
+# WorkBuddy — place the skill folder in ~/.workbuddy/skills/
+cp -r buffett-wisdom ~/.workbuddy/skills/
+
+# Claude Code
+claude --install ./SKILL.md
+```
+
 ### Browse Letters
 
 ```bash
 # View a specific year
-cat data/letters/2024.md
+cat references/letters/2024.md
 
 # Search for keywords
-grep -r "Coca-Cola" data/letters/
+grep -r "Coca-Cola" references/letters/
 ```
 
 ### Query Holdings
 
 ```bash
-# Run query script
-./scripts/query.sh --year 2024 --quarter q4
-```
+# Run analysis engine
+python scripts/analyze.py --company "Apple"
 
-### Use in Your App
-
-```json
-// Fetch quotes via GitHub API
-GET https://raw.githubusercontent.com/shanjinki/buffett-wisdom/main/data/quotes.json
+# Query specific quarter
+cat references/holdings/quarterly_holdings.json | jq '.data["2024-Q4"]'
 ```
 
 ---
 
-## 📊 Data Sources
+## 💡 Investment Philosophy Quick Reference
 
-| Data Type | Source |
-|-----------|--------|
-| Shareholder Letters | [Berkshire Hathaway Official](https://www.berkshirehathaway.com/letters/letters.html) |
-| 13F Holdings | [SEC EDGAR](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001067973) |
-| Financial Data | Bloomberg, Yahoo Finance |
+| Principle | Description |
+|-----------|-------------|
+| 🏰 **Moat** | Look for businesses with durable competitive advantages |
+| 🎯 **Circle of Competence** | Invest only in businesses you understand |
+| 🛡️ **Margin of Safety** | Buy when price is significantly below intrinsic value |
+| 📈 **Mr. Market** | Use market fluctuations, don't be controlled by them |
+
+---
+
+## 📊 Classic Investment Cases
+
+| Company | Entry Year | Status | Return | Notes |
+|---------|------------|--------|--------|-------|
+| Coca-Cola | 1988 | Holding | ~20x | Most successful consumer brand investment |
+| Apple | 2016 | Holding | ~5x | Largest position, tech stock典范 |
+| PetroChina | 2000 | Exited 2007 | ~10x | Classic value discovery case |
+| Bank of America | 2011 | Holding | ~3x | Post-financial crisis bet |
+| Wells Fargo | 1989 | Exited 2020 | ~10x | Held for 31 years |
 
 ---
 
@@ -121,21 +157,28 @@ If this project helps you, please give it a ⭐ star!
 ## 📧 Contact
 
 - GitHub Issues: [Open an Issue](https://github.com/shanjinki/buffett-wisdom/issues)
-- Email: hello@example.com
 
 ---
 
 *Built with ❤️ for the value investing community*
 
 ---
-
 # 中文
 
 ## 📖 项目介绍
 
-**巴菲特智慧宝库** 是目前最完整的开源巴菲特致股东信全集（1957-2025）和伯克希尔历史持仓数据库（13F季度报告，1999 Q1起）。
+**巴菲特智慧宝库** 是目前最完整的开源巴菲特致股东信全集（1957-2025）和伯克希尔历史持仓数据库。
 
 这个项目是投资者、研究者和所有想要学习奥马哈先知智慧的人的一站式资源库。
+
+### 数据覆盖范围
+
+| 数据类型 | 覆盖范围 | 状态 |
+|---------|---------|------|
+| 📖 致股东信 | 1957-2025（69 年） | ✅ 完整 |
+| 📊 季度持仓 | 2010-Q1 至 2025-Q4 | ✅ 完整 |
+| 💎 投资金句 | 69+ 条精选语录 | ✅ 完整 |
+| 📈 经典案例 | 可口可乐、苹果、中石油 | ✅ 完整 |
 
 ---
 
@@ -143,81 +186,77 @@ If this project helps you, please give it a ⭐ star!
 
 | 功能 | 说明 |
 |------|------|
-| 📖 **致股东信** | 1957-2025完整收录，含摘要和核心观点 |
-| 📊 **持仓数据** | 季度13F报告，详细记录持仓变化 |
-| 💎 **投资金句** | 50+条经典语录，中英双语对照 |
+| 📖 **致股东信** | 1957-2025 完整收录，含摘要和核心观点 |
+| 📊 **持仓数据** | 季度 13F 报告，详细记录持仓变化 |
+| 💎 **投资金句** | 69+ 条精选语录，中英双语对照 |
 | 🔍 **便捷检索** | 支持按年份、主题、关键词搜索 |
-| 🤖 **AI友好** | 结构化JSON格式，适配LLM应用 |
-
----
-
-## 📂 目录结构
-
-```
-buffett-wisdom/
-├── SKILL.md                 # OpenClaw 技能定义
-├── README.md                # 双语项目文档
-├── data/
-│   ├── letters/            # 致股东信摘要
-│   │   ├── 2024.md
-│   │   ├── 2023.md
-│   │   └── ...
-│   ├── holdings/           # 持仓数据
-│   │   ├── quarterly/     # 按季度分类的13F报告
-│   │   └── summary.json  # 汇总数据
-│   └── quotes.json         # 金句合集
-├── scripts/
-│   └── query.sh            # 命令行查询工具
-└── docs/
-    └── analysis/           # 深度分析报告
-```
+| 🤖 **AI 友好** | 结构化 JSON 格式，适配 LLM 应用 |
 
 ---
 
 ## 🚀 快速开始
 
+### 在 AI Agent 中使用
+
+```bash
+# WorkBuddy — 将 skill 文件夹放入 ~/.workbuddy/skills/
+cp -r buffett-wisdom ~/.workbuddy/skills/
+
+# Claude Code 安装
+claude --install ./SKILL.md
+```
+
 ### 查看股东信
 
 ```bash
 # 查看指定年份
-cat data/letters/2024.md
+cat references/letters/2024.md
 
 # 关键词搜索
-grep -r "可口可乐" data/letters/
+grep -r "可口可乐" references/letters/
 ```
 
 ### 查询持仓
 
 ```bash
-# 运行查询脚本
-./scripts/query.sh --year 2024 --quarter q4
-```
+# 运行分析引擎
+python scripts/analyze.py --company "苹果"
 
-### 在应用中使用
-
-```json
-// 通过 GitHub API 获取金句
-GET https://raw.githubusercontent.com/shanjinki/buffett-wisdom/main/data/quotes.json
+# 查询指定季度
+cat references/holdings/quarterly_holdings.json | jq '.data["2024-Q4"]'
 ```
 
 ---
 
-## 📊 数据来源
+## 💡 投资哲学速查
 
-| 数据类型 | 来源 |
-|---------|------|
-| 致股东信 | [伯克希尔哈撒韦官网](https://www.berkshirehathaway.com/letters/letters.html) |
-| 13F持仓 | [SEC EDGAR](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001067973) |
-| 财务数据 | Bloomberg, Yahoo Finance |
+| 原则 | 说明 |
+|------|------|
+| 🏰 **护城河** | 寻找具有持久竞争优势的企业 |
+| 🎯 **能力圈** | 只投资自己理解的企业 |
+| 🛡️ **安全边际** | 价格显著低于内在价值时买入 |
+| 📈 **市场先生** | 利用市场波动，不被其左右 |
+
+---
+
+## 📊 经典投资案例
+
+| 公司 | 进入年份 | 状态 | 收益 | 备注 |
+|------|---------|------|------|------|
+| 可口可乐 | 1988 | 持有中 | ~20 倍 | 最成功的消费品牌投资 |
+| 苹果 | 2016 | 持有中 | ~5 倍 | 最大持仓 |
+| 中石油 | 2000 | 2007 年退出 | ~10 倍 | 经典价值发现案例 |
+| 美国银行 | 2011 | 持有中 | ~3 倍 | 金融危机后布局 |
+| 富国银行 | 1989 | 2020 年退出 | ~10 倍 | 持有 31 年 |
 
 ---
 
 ## 🤝 贡献指南
 
 1. **Fork** 本仓库
-2. **创建** 分支 (`git checkout -b add-2024-letter`)
-3. **提交** 更改 (`git commit -m "添加2024年摘要"`)
-4. **推送** 到分支 (`git push origin add-2024-letter`)
+2. **创建** 分支
+3. **提交** 更改
+4. **推送** 到分支
 5. **发起** Pull Request
 
 ---
@@ -225,18 +264,6 @@ GET https://raw.githubusercontent.com/shanjinki/buffett-wisdom/main/data/quotes.
 ## 📜 许可证
 
 MIT 许可证 - 详见 [LICENSE](LICENSE)
-
----
-
-## ⭐ 支持我们
-
-如果这个项目对你有帮助，请给我们一个 ⭐ 星标！
-
----
-
-## 📧 联系方式
-
-- GitHub Issues: [提交问题](https://github.com/shanjinki/buffett-wisdom/issues)
 
 ---
 
