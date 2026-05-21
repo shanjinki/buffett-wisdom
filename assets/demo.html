@@ -7,163 +7,220 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #1a1a2e;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: #f5f5f5;
+    display: flex; justify-content: center; padding: 40px 20px;
+    min-height: 100vh;
   }
-  .demo-container {
+  .app {
     max-width: 800px; width: 100%;
-    display: flex; flex-direction: column; gap: 32px;
+    display: flex; flex-direction: column; gap: 40px;
   }
-  .chat-card {
-    background: #16213e; border-radius: 16px;
-    overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+  /* Chat window */
+  .chat-window {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    overflow: hidden;
   }
-  .chat-header {
-    background: #0f3460; padding: 14px 20px;
-    display: flex; align-items: center; gap: 10px;
+  .chat-window .title-bar {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: #666;
   }
-  .chat-header .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .chat-header .dot.r { background: #ff5f57; }
-  .chat-header .dot.y { background: #ffbd2e; }
-  .chat-header .dot.g { background: #27ca40; }
-  .chat-header .title {
-    color: #8892b0; font-size: 13px;
-    margin-left: 8px; font-weight: 500;
+  .chat-window .title-bar .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #22c55e;
   }
-  .chat-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
-  .msg {
-    display: flex; flex-direction: column; gap: 4px;
-    max-width: 90%;
+  .chat-window .messages {
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 20px;
+    min-height: 200px;
   }
-  .msg.user { align-self: flex-end; }
-  .msg.ai { align-self: flex-start; }
-  .msg .label {
-    font-size: 11px; color: #8892b0; text-transform: uppercase;
-    letter-spacing: 0.5px; margin-bottom: 2px;
+
+  /* Message */
+  .msg { display: flex; gap: 10px; }
+  .msg.user { flex-direction: row-reverse; }
+  .msg .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
   }
+  .msg.ai .avatar { background: #1e40af; }
+  .msg.user .avatar { background: #6b7280; }
+  .msg .content {
+    max-width: 85%;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .msg .name {
+    font-size: 12px; font-weight: 600; color: #333;
+    padding: 0 2px;
+  }
+  .msg.user .name { text-align: right; }
   .msg .bubble {
-    padding: 12px 16px; border-radius: 12px;
-    font-size: 14px; line-height: 1.6; color: #eaeaea;
+    padding: 12px 16px; border-radius: 10px;
+    font-size: 14px; line-height: 1.7; color: #1a1a1a;
     white-space: pre-wrap;
   }
-  .msg.user .bubble { background: #2563eb; }
-  .msg.ai .bubble { background: #1e293b; border: 1px solid #334155; }
-  .msg .bubble .highlight { color: #fbbf24; }
+  .msg.ai .bubble { background: #f3f4f6; border-radius: 10px 10px 10px 4px; }
+  .msg.user .bubble { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px 10px 4px 10px; }
+  .msg .bubble b { color: #111; }
+  .msg .bubble .tag {
+    display: inline-block; background: #1e40af; color: #fff;
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    margin-bottom: 6px; font-weight: 600;
+  }
   .msg .bubble .disclaimer {
-    color: #94a3b8; font-size: 12px; margin-top: 8px;
-    padding-top: 8px; border-top: 1px solid #334155;
+    display: block; color: #999; font-size: 12px; margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid #e5e5e5;
   }
-  .skill-badge {
-    display: inline-block; background: #0f3460;
-    color: #64ffda; font-size: 12px; padding: 4px 10px;
-    border-radius: 8px; margin-bottom: 10px;
+  .msg .bubble .emoji-li { margin: 2px 0; }
+
+  /* Input bar */
+  .chat-window .input-bar {
+    padding: 12px 16px; border-top: 1px solid #e5e5e5;
+    display: flex; align-items: center; gap: 8px;
   }
-  @media (max-width: 600px) {
-    .chat-body { padding: 12px; }
-    .msg .bubble { font-size: 13px; }
+  .chat-window .input-bar .input {
+    flex: 1; padding: 10px 14px; border: 1px solid #d1d5db;
+    border-radius: 8px; font-size: 14px; color: #999;
+    background: #fafafa;
   }
+  .chat-window .input-bar .send {
+    padding: 8px 20px; background: #1e40af; color: #fff;
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Section label */
   .section-label {
-    color: #8892b0; font-size: 14px; text-align: center;
-    font-weight: 600; letter-spacing: 1px;
+    font-size: 14px; font-weight: 700; color: #555;
+    text-align: center; letter-spacing: 0.5px;
   }
 </style>
 </head>
 <body>
-<div class="demo-container">
+<div class="app">
 
-<!-- Demo 1: Company Analysis -->
-<div>
-  <div class="section-label">Demo 1 &mdash; Company Analysis · 公司分析</div>
-</div>
-<div class="chat-card">
-  <div class="chat-header">
-    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+<!-- ==================== Demo 1: Company Analysis ==================== -->
+<div class="section-label">Demo 1 — Company Analysis · 公司分析</div>
+
+<div class="chat-window">
+  <div class="title-bar">
+    <div class="dot"></div>
+    <span>AI Agent · buffett-wisdom</span>
   </div>
-  <div class="chat-body">
+  <div class="messages">
     <div class="msg user">
-      <span class="label">You</span>
-      <div class="bubble">Should I invest in Moutai?<br>茅台能投吗？</div>
+      <div class="avatar">Y</div>
+      <div class="content">
+        <div class="name">You</div>
+        <div class="bubble">用巴菲特的框架分析一下茅台</div>
+      </div>
     </div>
     <div class="msg ai">
-      <span class="label">Silicon Buffett · 硅基巴菲特</span>
-      <div class="bubble"><span class="highlight">Let me think about this the way I'd think about any business — by going through the four steps.</span>
+      <div class="avatar">SB</div>
+      <div class="content">
+        <div class="name">Silicon Buffett</div>
+        <div class="bubble"><b>好，走四步漏斗。</b>
 
-<b>Step 1: Circle of Competence</b>
-I've visited China. I've seen the culture around baijiu — it's fascinating. But do I understand the regulatory environment for state-owned liquor companies? <span class="highlight">Not well enough to bet billions on it.</span> That alone would make me cautious.
+<b>Step 1 — 能力圈</b>
+我去过中国，见过白酒文化——很有意思。但国有酒企的监管环境我能搞懂吗？<b>不太够。光这一条，我就不会下重注。</b>
 
-<b>Step 2: Moat</b>
-A brand so strong people gift it at weddings. Pricing power that makes Coca-Cola look modest. If you put $10 billion on the table tomorrow, you couldn't build another Moutai. <span class="highlight">That's a real moat.</span>
+<b>Step 2 — 护城河</b>
+一个品牌强到婚礼上拿来送礼，定价权让可口可乐都眼红。给你 100 亿，你造不出第二个茅台。<b>这是真护城河。</b>
 
-<b>Step 3: Management & Valuation</b>
-This is where I'd need to dig deeper. State-owned enterprises have different incentives than shareholder-owned businesses. The numbers might look great, but <span class="highlight">I need to understand who's steering the ship before I get on board.</span>
+<b>Step 3 — 管理层</b>
+国企的激励结构和股东导向的企业不一样。数字再好，<b>我得搞清楚谁在掌舵才敢上船。</b>
+
+<b>Step 4 — 估值</b>
+现在 PE ~25x，增速 ~15%，不便宜。$1,500 以下我才觉得有安全边际。
+
 <span class="disclaimer">⚠️ 以上仅为巴菲特投资哲学的推演，不构成任何投资建议。</span></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Demo 2: Holdings Query -->
-<div>
-  <div class="section-label" style="margin-top: 12px;">Demo 2 &mdash; Holdings Query · 持仓查询</div>
-</div>
-<div class="chat-card">
-  <div class="chat-header">
-    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+<!-- ==================== Demo 2: Holdings Query ==================== -->
+<div class="section-label">Demo 2 — Holdings Query · 持仓查询</div>
+
+<div class="chat-window">
+  <div class="title-bar">
+    <div class="dot"></div>
+    <span>AI Agent · buffett-wisdom</span>
   </div>
-  <div class="chat-body">
+  <div class="messages">
     <div class="msg user">
-      <span class="label">You</span>
-      <div class="bubble">How much Apple do we still own? When did we start buying?</div>
+      <div class="avatar">Y</div>
+      <div class="content">
+        <div class="name">You</div>
+        <div class="bubble">我们还有多少苹果？什么时候开始买的？</div>
+      </div>
     </div>
     <div class="msg ai">
-      <span class="label">Silicon Buffett · 硅基巴菲特</span>
-      <div class="bubble"><b>Ah, Apple.</b> The best investment we ever made — better than Coca-Cola, better than GEICO. Not bad for a company I avoided for decades because I "didn't understand technology." Turns out I was looking at it wrong — <span class="highlight">it's not a tech company, it's a consumer products company with the strongest ecosystem moat I've ever seen.</span>
+      <div class="avatar">SB</div>
+      <div class="content">
+        <div class="name">Silicon Buffett</div>
+        <div class="bubble"><b>啊，苹果。</b>我们做过最棒的投资——比可口可乐还好，比 GEICO 还好。讽刺的是，我因为"不懂科技"回避了它几十年。后来我想通了——<b>苹果不是科技公司，它是消费品公司，只是它的护城河叫生态系统。</b>
 
-We started buying in <b>2016 Q1</b>. At the peak, we held over <b>900 million shares</b>. But as of <b>2025 Q1</b>, we're down to about <b>300 million shares</b>.
+<b>2016 Q1</b>：开始买入，~980 万股
+<b>2018 Q3</b>：峰值，超过 9 亿股
+<b>2025 Q1</b>：减持至约 3 亿股
 
-Why did we sell? Not because Apple became a bad business — far from it. <span class="highlight">We trimmed because the position simply got too big.</span> When one stock becomes 40%+ of your portfolio, you're no longer diversified.
+为什么卖？不是苹果变差了——<b>是仓位太大了。</b>一只股票占组合 40%+，就不叫分散投资了。
 
-Tim Cook has done a magnificent job. The ecosystem is the moat. People don't switch phones over a $100 price difference when their whole digital life — photos, messages, apps, payments — lives in one ecosystem. <span class="highlight">That's stickiness you can't buy.</span></div>
+Tim Cook 做得非常好。人们换手机不是因为差 $100，而是因为整个数字生活——照片、信息、支付——都锁在一个生态里。<b>这种粘性你花多少钱都买不到。</b></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Demo 3: Philosophy -->
-<div>
-  <div class="section-label" style="margin-top: 12px;">Demo 3 &mdash; Philosophy · 投资哲学</div>
-</div>
-<div class="chat-card">
-  <div class="chat-header">
-    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <span class="title">WorkBuddy — buffett-wisdom skill active</span>
+<!-- ==================== Demo 3: Philosophy ==================== -->
+<div class="section-label">Demo 3 — Philosophy · 投资哲学</div>
+
+<div class="chat-window">
+  <div class="title-bar">
+    <div class="dot"></div>
+    <span>AI Agent · buffett-wisdom</span>
   </div>
-  <div class="chat-body">
+  <div class="messages">
     <div class="msg user">
-      <span class="label">You</span>
-      <div class="bubble">What is a moat? Explain it simply.</div>
+      <div class="avatar">Y</div>
+      <div class="content">
+        <div class="name">You</div>
+        <div class="bubble">什么是护城河？简单讲讲</div>
+      </div>
     </div>
     <div class="msg ai">
-      <span class="label">Silicon Buffett · 硅基巴菲特</span>
-      <div class="bubble"><b>Imagine a castle surrounded by a moat filled with crocodiles.</b> The castle is your business. The crocodiles are what keep competitors from storming in and taking your profits.
+      <div class="avatar">SB</div>
+      <div class="content">
+        <div class="name">Silicon Buffett</div>
+        <div class="bubble"><b>想象一座城堡，周围是养满鳄鱼的护城河。</b>城堡是你的生意，鳄鱼阻挡竞争者冲进来抢你的利润。
 
-Some moats are obvious — <span class="highlight">Coca-Cola's brand</span>. You could spend $100 billion and you still couldn't make people switch from Coke to "New Cola." Trust me, someone tried.
+有些护城河很明显——<b>可口可乐的品牌</b>。花 1000 亿你也造不出第二个让人们从可口可乐转投「新可乐」的品牌。我问你，有人试过。
 
-Some moats are sneakier — <span class="highlight">GEICO's cost advantage</span>. They sell insurance directly, no agents, no commissions. A competitor could copy the website, but they can't copy 50 years of claims data that makes the underwriting better.
+有些护城河更隐蔽——<b>GEICO 的成本优势</b>。直接卖保险，不养代理人，省下佣金。竞争者可以复制网站，但复制不了 50 年的理赔数据。
 
-The question I ask before every investment is simple: <span class="highlight">"If I had $10 billion and the smartest people in the world, could I build a competitor that takes this company down in 5 years?"</span>
+投资前我只问一个问题：<b>「如果我有 100 亿和最聪明的人，5 年内能干翻这家公司吗？」</b>
 
-If the answer is "probably yes," I walk away. If the answer is "not a chance" — now we're talking.
+答「有可能」——我走人。答「门都没有」——我们谈谈。
 
-<b>The five types of moats I look for:</b>
-1. 🏷️ <b>Brand</b> — Coca-Cola, Moutai
-2. 💰 <b>Cost Advantage</b> — GEICO, Costco
-3. 🔗 <b>Switching Costs</b> — Apple ecosystem, enterprise software
-4. 🌐 <b>Network Effects</b> — American Express (more merchants → more users → more merchants)
-5. 🎫 <b>Toll Bridge</b> — See's Candies (small but irreplaceable in its market)</div>
+<b>五类护城河：</b>
+<span class="emoji-li">🏷️ <b>品牌</b> — 可口可乐、茅台</span>
+<span class="emoji-li">💰 <b>成本优势</b> — GEICO、Costco</span>
+<span class="emoji-li">🔗 <b>转换成本</b> — 苹果生态、企业软件</span>
+<span class="emoji-li">🌐 <b>网络效应</b> — 美国运通</span>
+<span class="emoji-li">🎫 <b>收费站</b> — See's Candies（小但无可替代）</span></div>
+      </div>
     </div>
+  </div>
+  <div class="input-bar">
+    <div class="input">Ask about investing...</div>
+    <div class="send">Send</div>
   </div>
 </div>
 
