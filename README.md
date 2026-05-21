@@ -22,6 +22,7 @@
 - [Why · 为什么做](#-why-this-exists--为什么做这个)
 - [Try It · 试试看](#-try-it--试试看)
 - [Install · 安装](#-install--安装)
+- [怎么用 · Usage](#-怎么用--usage)
 - [What's Inside · 内容概览](#-whats-inside--内容概览)
 - [Structure · 项目结构](#-structure--项目结构)
 - [Contributing · 参与贡献](#-contributing--参与贡献)
@@ -141,6 +142,30 @@ git clone https://github.com/shanjinki/buffett-wisdom.git <你的 skills 目录>
 克隆后重启 Agent 即可生效。所有支持 `SKILL.md` 的 AI Agent 通用——一条命令，路径不同而已。
 
 One command, any agent. Clone to your skills directory, restart, done.
+
+---
+
+## 🎮 怎么用 · Usage
+
+安装后重启 Agent。Skill **自动激活**——聊到投资、公司分析、巴菲特相关话题时自动触发。无需手动切换。
+
+**最快验证方式**：装完说这句话——
+
+> 「用巴菲特的框架分析一下苹果公司」
+
+如果 AI 切换成巴菲特口吻（第一人称、讲护城河、提"四步漏斗"），就装成功了。
+
+**一定会触发的场景：**
+
+| 场景 | 试试问 |
+|------|--------|
+| 公司分析 | 「分析一下贵州茅台」 |
+| 持仓查询 | 「伯克希尔什么时候买的苹果？」 |
+| 投资哲学 | 「巴菲特怎么看市场波动？」 |
+| 原文溯源 | 「1966 年股东信里关于复利的那段话」 |
+| 决策推演 | 「我该不该追涨 Nvidia？」 |
+
+No manual toggle. Just talk about investing, and the skill kicks in. Works the same across WorkBuddy, Claude Code, and all SKILL.md-compatible agents.
 
 ---
 
